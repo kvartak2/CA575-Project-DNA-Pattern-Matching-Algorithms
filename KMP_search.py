@@ -1,5 +1,13 @@
+
+#KMP Algorithm
+
 import pandas as pd
 import numpy as np
+import time
+
+
+start = time.time()
+
 
 def fun_lps(pattern_list,lps):
     i=0
@@ -24,9 +32,9 @@ def fun_pat_match(pattern_list,find_pat_list,lps):
             i=i+1
             j=j+1
         if(j==find_pat_LEN):
-            print("Pattern Found Index="+str(i-j))
+            print("Pattern Found at Index : "+str(i-j))
             j=lps[j-1]
-        elif(pattern_list[i]!=find_pat_list[j]):
+        elif(i<pattern_LEN and pattern_list[i]!=find_pat_list[j]):
             if(j==0):
                 i=i+1
             elif(j!=0):
@@ -34,24 +42,33 @@ def fun_pat_match(pattern_list,find_pat_list,lps):
 
 
 
-pattern="ABABC"
-pattern_list = list(disease)
-find_pat="ABC"
+DNA_f = open("defected_chr1_GRCh38.txt","r")
+DNA_contents = DNA_f.read()
+pattern=DNA_contents
+
+lamda_virus_f = open("lamda_virus.txt","r")
+lamda_virus_contents = lamda_virus_f.read()
+find_pat=lamda_virus_contents
+
+
+pattern_list = list(pattern)
 find_pat_list=list(find_pat)
-
-
 
 pattern_LEN=len(pattern_list)
 find_pat_LEN=len(find_pat_list)
 lps=[0] * find_pat_LEN
-#lps=[]
-#print(LEN)
-#print(lps)
+
 
 
 fun_lps(pattern_list,lps)
-print(lps)
+
 fun_pat_match(pattern_list,find_pat_list,lps)
 
 
-#lps[0]=0
+
+lamda_virus_f.close()
+DNA_f.close()
+
+end = time.time()
+
+print(f"Runtime of the program is {end - start}")
