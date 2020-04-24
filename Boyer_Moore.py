@@ -40,6 +40,7 @@ lamda_virus_contents = lamda_virus_f.read()
 DNA_pattern=lamda_virus_contents
 
 i=0
+count=0
 patLen=len(DNA_pattern)
 DNALen=len(DNA_seq)
     
@@ -48,7 +49,6 @@ borderArray = [0] * (patLen + 1)
 shiftArray = [0] * (patLen + 1) 
     
 fullSuffixMatch_case1(shiftArray, borderArray, DNA_pattern, patLen)
-print(borderArray)
 fullSuffixMatch_case2(shiftArray, borderArray, DNA_pattern, patLen)
     
     
@@ -58,11 +58,13 @@ while(i <= DNALen - patLen):
         j=j-1
     if(j<0):
         print("\npattern found at position : ",i)
+        count=count+1
         i = i +shiftArray[0]
     else:
         i = i + shiftArray[j+1]
 
 
+print("\nNo. of occurrences=",count)
 lamda_virus_f.close()
 DNA_f.close()
 
