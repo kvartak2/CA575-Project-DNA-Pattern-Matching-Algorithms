@@ -48,12 +48,14 @@ fun_lps(DNA_pattern_list,lps)
 
 i=0
 j=0
+count=0
 while(i < DNA_seq_LEN):
     if(DNA_seq_list[i]==DNA_pattern_list[j]):
         i=i+1
         j=j+1
     if(j==DNA_pattern_LEN):
         print("Pattern Found at Index : "+str(i-j))
+        count=count+1
         j=lps[j-1]
     elif(i<DNA_seq_LEN and DNA_seq_list[i]!=DNA_pattern_list[j]):
         if(j==0):
@@ -62,6 +64,7 @@ while(i < DNA_seq_LEN):
             j=lps[j-1]
 
 
+print("\nNo. of occurrences=",count) 
 
 lamda_virus_f.close()
 DNA_f.close()
